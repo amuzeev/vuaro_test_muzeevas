@@ -31,5 +31,6 @@ This application was developed and tested on:
 ## Start
 
 1. Run command: `python manage.py syncdb`
-2. Run `run_celery.sh` script to start celery worker: `. run_celery.sh`
-3. Open browser at 127.0.0.1:8000
+2.  Run command: `python manage.py collectstatic`
+3. Run `run_celery.sh` script to start celery worker: `. run_celery.sh`
+4. Open browser at 127.0.0.1:8000
