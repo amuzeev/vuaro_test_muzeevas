@@ -20,6 +20,7 @@ This application was developed and tested on:
         EMAIL_HOST_PASSWORD = '********'
         EMAIL_PORT = 587
     ```
+    If EMAIL_HOST is Gmail check mail settings at `https://www.google.com/settings/security/lesssecureapps`
 
 3. Setup DATABASES settings (settings.py)
 
