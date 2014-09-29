@@ -21,44 +21,13 @@ class Picture(models.Model):
     owner = models.ForeignKey(to=User, verbose_name=_(u'Владелец'), related_name='my_pictures')
 
     image = ThumbnailField(_('Изображение'), upload_to=upload_to, patterns={
-        # Pattern Format:
-        #   <Name>: (
-        #   (<square_size>,),       # with defautl process_method
-        #   (<width>, <height>,),   # with default process_method
-        #   (<width>, <height>, <method or method_name>),
-        #   (<width>, <height>, <method or method_name>, <method options>),
-        #   )
-        #
-        # If Name is ``None`` that mean original image will be processed
-        # with the pattern
-        #
-        # Convert original image to sepia and resize it to 800x400 (original
-        # size is 804x762)
-        None: ((1280, 1280, 'thumbnail'),),
-        # Create 640x480 resized thumbnail as large.
-        'large': ((640, 480, 'thumbnail'),),
-        # Create 320x240 cropped thumbnail as small. You can write short
-        # pattern if the number of appling pattern is 1
-        'small': (200, 200, 'crop', {'left': 0, 'upper': 0}),
-        # Create 160x120 thumbnail as tiny (use default process_method to
-        # generate)
-        'tiny': (160, 120),
-        #
-        # These thumbnails are not generated while accessed. These can be
-        # accessed with the follwoing code::
-        #
-        #   entry.thumbnail.large
-        #   entry.thumbnail.small
-        #   entry.thumbnail.tiny
-        #
-        #   # shortcut properties
-        #   entry.thumbnail.large_file  # as entry.thumbnail.large.file
-        #   entry.thumbnail.large_path  # as entry.thumbnail.large.path
-        #   entry.thumbnail.large_url   # as entry.thumbnail.large.url
-        #   entry.thumbnail.large.size  # as entry.thumbnail.large.size
-        #
-    },
-    blank=True, null=True
+            None: ((1280, 1280, 'thumbnail'),),
+            'large': ((640, 480, 'thumbnail'),),
+            'small': ((400, 400, 'thumbnail'), (200, 200, 'crop', {'left': 0, 'upper': 0})),
+
+            'tiny': (160, 120),
+        },
+        blank=True, null=True
     )
     image_processed = models.BooleanField(verbose_name=_(u'Обработана'), default=False)
 
