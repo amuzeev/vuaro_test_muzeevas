@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block page_h1 %}
+    {% if my %}
+        Мои изображения
+    {% else %}
+        Изображения <strong>{{ gallery_user.username }}</strong>
+    {% endif %}
+
+    {% if pictures_count %}
+        ({{ pictures_count }})
+    {% endif %}
+
+{% endblock %}
+

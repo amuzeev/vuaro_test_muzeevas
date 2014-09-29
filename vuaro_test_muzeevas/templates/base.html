@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Vuaro test. Muzeev A.S.</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ STATIC_URL }}bootstrap/jumbotron.css" rel="stylesheet">
+
+    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css">
+
+
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'index' %}">Vuaro test</a>
+                </div>
+
+
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                    {% if user.is_authenticated %}
+                        <ul class="nav navbar-nav">
+
+                            {% comment %}<li class="active"><a href="#">Home</a></li>{% endcomment %}
+                            <li><a href="{% url 'my_picture' %}">Мои изображения</a></li>
+                            <li><a href="{% url 'upload' %}">Добавить</a></li>
+                            <li><a href="{% url 'delete' %}">Удалить</a></li>
+                        </ul>
+
+                        <ul class="navbar-form navbar-right">
+                            <li><a href="{% url 'logout' %}" class="btn btn-primary" href="#">Logout</a></li>
+                        </ul>
+
+                    {% else %}
+                        {% include 'registration/include/login_form.html' %}
+                    {% endif %}
+                </nav>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-sm-8 content">
+                    {% block content %}
+                        <div class="page-header">
+                            <h1>{% block page_h1 %}Последние изображения{% endblock %}</h1>
+                        </div>
+
+                        <div class="pictures">
+                            {% for picture in pictures %}
+                                <a href="{{ picture.image.url }}" data-gallery>
+                                    <img class="img-thumbnail" alt="200x200" src="{{ picture.image.small.url }}" style="width: 200px; height: 200px;">
+                                </a>
+                            {% empty %}
+                                <div class="alert alert-info" role="alert">
+                                    Изображений нет!
+                                </div>
+                            {% endfor %}
+
+
+                        </div>
+
+                        {% if my and pictures_count %}
+                            <div class="email_block">
+                                <div style="margin: 20px 0">
+                                    <button type="button" class="btn btn-primary" id="send_email"
+                                            data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">
+                                        <span class="glyphicon glyphicon-envelope"></span> Отправить на почту
+                                    </button>
+                                </div>
+
+                                <div class="alert alert-success hidden" role="alert">
+                                    Отправка сообщения поставлена в очередь.
+                                </div>
+
+                                <div class="alert alert-danger hidden" role="alert">
+                                    При отправке сообщения произошла ошибка.
+                                </div>
+
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <div class="sidebar-module">
+                        <h4>Пользователи</h4>
+                        <ol class="list-unstyled">
+                            {% for u in users %}
+                                <li><a href="{% url 'user_picture' user_pk=u.pk %}">{{ u.username }}</a></li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <footer>
+                <p>&copy; Company 2014</p>
+            </footer>
+        </div> <!-- /container -->
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
+
+        <script src="{{ STATIC_URL }}js/script.js"></script>
+
+        {% if not user.is_authenticated %}
+            {% include 'registration/include/registration_modal.html' %}
+        {% endif %}
+
+        {% include 'include/gallery-snippet.html' %}
+
+
+
+    </body>
+</html>

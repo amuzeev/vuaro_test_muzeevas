@@ -1,0 +1,14 @@
+amqp==1.4.6
+billiard==3.3.0.18
+MySQL-python==1.2.5
+Django==1.7
+djangorestframework==2.4.3
+django-rest-swagger==0.1.14
+markdown=2.5
+django-filter==0.7
+celery==3.1.15
+kombu==3.0.23
+Pillow==2.5.3
+pytils==0.3
+django-thumbnailfield==0.2.2
+django-annoying==0.8.0

@@ -1,0 +1,11 @@
+
+.picture-remove {
+    position: relative;
+    top: -205px;
+    left: 165px;
+}
+
+.img-thumbnail {
+    width: 210px;
+    height: 210px;
+}
