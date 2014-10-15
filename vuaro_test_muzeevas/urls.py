@@ -7,13 +7,14 @@ from django.conf.urls.static import static
 
 
 from apps.gallery.urls import urlpatterns as gallery_urls
-from apps.views import IndexView, LoginView, LogoutView, RegistrationView
+from apps.views import IndexView, LoginView, LogoutView, RegistrationView, Test_R
 
 urlpatterns = patterns('',
 
 
 
     url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^test_r/$', Test_R.as_view(), name='test_r'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),

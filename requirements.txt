@@ -12,3 +12,6 @@ Pillow==2.5.3
 pytils==0.3
 django-thumbnailfield==0.2.2
 django-annoying==0.8.0
+
+tornado==4.0.2
+pika==0.9.14

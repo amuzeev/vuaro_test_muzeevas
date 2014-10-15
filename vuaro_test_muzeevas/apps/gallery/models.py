@@ -31,9 +31,13 @@ class Picture(models.Model):
     )
     image_processed = models.BooleanField(verbose_name=_(u'Обработана'), default=False)
 
+    class Meta:
+        ordering = ('-date_created',)
 
     def get_notes(self):
         return self.notes.filter(user=self.owner)
+
+
 
 #
 # class Note(models.Model):

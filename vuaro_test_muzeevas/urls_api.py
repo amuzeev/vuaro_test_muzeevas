@@ -17,6 +17,6 @@ user_picture = UserPictureViewSet.as_view({'get': 'list'})
 urlpatterns = format_suffix_patterns(patterns('',
 
     url(r'^my/$', my_picture, name='my_picture'),
-    #url(r'^user/(?P<user_pk>\d+)/$', user_picture, name='user_picture'),
+    url(r'^user/(?P<user_pk>\d+)/$', user_picture, name='user_picture'),
 
 ))

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="/media/bootstrap/css/bootstrap.css" rel="stylesheet">
+</head>
+<body style="padding:20px">
+
+<div id="content">
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li class="active"><a href="#status" data-toggle="tab">Status</a></li>
+    {% for db in dbs %}                
+        <li><a href="#keys_values_{{ db.name_redis }}" data-toggle="tab">{{ db.name }}: Keys/Values</a></li>        
+    {% endfor %}
+    </ul>
+
+    <div id="my-tab-content" class="tab-content">        
+        <div class="tab-pane active" id="status">
+            <h3>Tornadio load statistics</h3>
+            <p><pre>{{ load_stats }}</pre></p>
+
+            <h3>Redis info</h3>
+            <p><pre>{{ default_status }}</pre></p>
+        </div>        
+        {% for db in dbs %}
+        <div class="tab-pane" id="keys_values_{{ db.name_redis }}">
+            <h3>Keys/Values</h3>            
+            {% for x in db.keys_values %}
+                <p><b>{{ x.0 }}</b>
+                    <pre class="pre-scrollable">{{ x.1 }}</pre>
+                </p>
+            {% endfor %}
+        </div>
+        {% endfor %}        
+    </div>
+</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script type="text/javascript" src="/media/bootstrap/js/bootstrap.js"></script>
+</html>

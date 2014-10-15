@@ -4,13 +4,40 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.views import auth_login, auth_logout, get_current_site
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import TemplateView
 from django.views.generic.base import View, ContextMixin
 
 from gallery.models import Picture
 
 from .forms import AuthForm, RegForm
+
+
+class Test_R(TemplateView):
+    template_name = "upload.html"
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+
+        import pika
+
+        parameters = pika.ConnectionParameters(
+            host='localhost',
+            port=5672
+        )
+        connection = pika.BlockingConnection(parameters)
+
+        channel = connection.channel()
+        channel.queue_declare(queue='completed', durable=True)
+
+        message = {
+            'user_id': str(request.user.id),
+            'body': 'my message %s' % str(request.user.id)
+        }
+        channel.basic_publish('', 'completed', str(message))
+        connection.close()
+
+        return HttpResponse("OK")
 
 
 class IndexView(TemplateView):

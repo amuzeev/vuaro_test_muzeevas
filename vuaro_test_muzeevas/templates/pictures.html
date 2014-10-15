@@ -13,3 +13,17 @@
 
 {% endblock %}
 
+
+{% block pictures %}
+    <div class="pictures">
+
+            <a ng-repeat="picture in pictures" href="{$ picture.image_url $}" id="picture_id{$picture.id$}" class="picture" data-gallery >
+                <img class="img-thumbnail" alt="200x200" src="{$picture.image_url$}" style="width: 200px; height: 200px;">
+            </a>
+
+            {% comment %}<div class="alert alert-info" role="alert">
+                Изображений нет!
+            </div>{% endcomment %}
+
+    </div>
+{% endblock %}

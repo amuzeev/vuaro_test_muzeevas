@@ -25,7 +25,7 @@ from .tasks import async_save_in_memory, async_save_temporary, send_pictures_by_
 class PictureView(ListView):
     model = Picture
     template_name = "pictures.html"
-    context_object_name = 'pictures'
+    context_object_name = 'pictures8'
 
     def get(self, request, *args, **kwargs):
 

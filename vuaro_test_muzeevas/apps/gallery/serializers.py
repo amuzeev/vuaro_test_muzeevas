@@ -14,8 +14,9 @@ class PictureSerializer(serializers.ModelSerializer):
     image_url -- Url превью изображения
     """
     image_url = serializers.Field(source='image.url')
-    image_small_url = serializers.CharField(source='image.small.url')
+    #image_small_url = serializers.CharField(source='image.small.url')
 
     class Meta:
         model = Picture
-        fields = ('id', 'image_url', 'image_small_url')
+#        fields = ('id', 'image_url', 'image_small_url')
+        fields = ('id', 'image_url',)
