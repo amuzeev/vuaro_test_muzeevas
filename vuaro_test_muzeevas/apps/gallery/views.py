@@ -22,25 +22,21 @@ from .forms import PictureForm
 from .tasks import async_save_in_memory, async_save_temporary, send_pictures_by_email
 
 
-class PictureView(ListView):
-    model = Picture
+class PictureView(TemplateView):
     template_name = "pictures.html"
-    context_object_name = 'pictures8'
 
     def get(self, request, *args, **kwargs):
 
-        user = self.request.user
-        if 'user_pk' in self.kwargs:
-            user = get_object_or_404(User, pk=self.kwargs['user_pk'])
+        user = request.user
+        if 'user_pk' in kwargs:
+            user = get_object_or_404(User, pk=kwargs['user_pk'])
 
-        self.object_list = self.get_queryset().filter(owner=user).filter(image_processed=True)
-
-        context = self.get_context_data()
+        context = self.get_context_data(**kwargs)
         context.update({
             'my': request.user == user,
             'gallery_user': user,
-            'pictures_count': self.object_list.count()
         })
+
         return self.render_to_response(context)
 
 

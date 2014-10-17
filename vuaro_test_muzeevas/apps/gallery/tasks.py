@@ -10,6 +10,8 @@ from django.core.files.uploadedfile import InMemoryUploadedFile, File
 from django.core.mail import EmailMessage
 from django.conf import settings
 
+from sorl.thumbnail import get_thumbnail
+
 from .models import Picture
 
 
@@ -28,7 +30,7 @@ def send_to_rabbitmq(picture):
         'event_type': 'new_image',
         'picture_id': picture.id,
         'picture_image_url': picture.image.url,
-        'picture_image_small_url': picture.image.small.url
+        'picture_image_small_url': get_thumbnail(picture.image, '200x200', crop='center').url
     }
 
     msg = {
@@ -49,7 +51,7 @@ def async_save_in_memory(data, file_info, pk):
 
     picture.image_processed = True
     picture.save()
-    picture.image.small
+    #picture.image.small
 
     cache.clear()
 
@@ -64,13 +66,11 @@ def async_save_temporary(pk, path, filename):
 
     picture.image_processed = True
     picture.save()
-    picture.image.small
+    #picture.image.small
 
     send_to_rabbitmq(picture)
 
     os.remove(full_path)
-
-
 
 
 

@@ -8,7 +8,7 @@ INSTALLED_APPS += (
     'rest_framework',
     'rest_framework_swagger',
     'celery',
-    'thumbnailfield',
+    'sorl.thumbnail',
 
     'vuaro_test_muzeevas.apps.gallery'
 )
@@ -34,6 +34,9 @@ DATABASES = {
 }
 
 
+THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
+THUMBNAIL_REDIS_DB = 0
+
 SWAGGER_SETTINGS = {
     "exclude_namespaces": [], # List URL namespaces to ignore
     "api_version": '1',  # Specify your API's version
@@ -49,3 +52,5 @@ SWAGGER_SETTINGS = {
     "is_authenticated": False,  # Set to True to enforce user authentication,
     "is_superuser": False,  # Set to True to enforce admin only access
 }
+
+

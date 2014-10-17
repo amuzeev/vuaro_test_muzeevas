@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="ru" ng-app="GalleryApp">
+<html lang="ru" ng-app="galleryApp">
     <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,13 +22,11 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}Gallery/css/blueimp-gallery.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css">
 
-    <script src="{{ STATIC_URL }}js/angular/angular.min.js"></script>
-    <script src="{{ STATIC_URL }}js/controllers.js"></script>
 
     </head>
 
 
-    <body ng-controller="PictureListCtrl">
+    <body ng-controller="{% block ngController %}IndexPictureListCtrl{% endblock %}">
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -75,15 +74,15 @@
 
                         {% block pictures %}
                             <div class="pictures">
-                                {% for picture in pictures %}
-                                    <a href="{{ picture.image.url }}" class="picture" data-gallery>
-                                        <img class="img-thumbnail" alt="200x200" src="{{ picture.image.url }}" style="width: 200px; height: 200px;">
+
+                                    <a ng-repeat="pic in last_pictures" href="{$pic.image_url$}" class="picture" data-gallery>
+                                        <img class="img-thumbnail" alt="200x200" ng-src="{$pic.image_small_url$}" style="width: 200px; height: 200px;">
                                     </a>
-                                {% empty %}
-                                    <div class="alert alert-info" role="alert">
+
+                                    <div ng-hide="last_pictures.length" class="alert alert-info" role="alert">
                                         Изображений нет!
                                     </div>
-                                {% endfor %}
+
 
 
                             </div>
@@ -168,6 +167,10 @@
 
 
         </script>
+
+        <script src="{{ STATIC_URL }}js/angular/angular.min.js"></script>
+        <script src="{{ STATIC_URL }}js/angular-route/angular-route.min.js"></script>
+        <script src="{{ STATIC_URL }}js/controllers.js"></script>
 
         {% if not user.is_authenticated %}
             {% include 'registration/include/registration_modal.html' %}

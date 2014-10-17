@@ -27,6 +27,14 @@ class PictureViewSet(viewsets.ModelViewSet):
         obj.owner = self.request.user
 
 
+class LastPictureViewSet(PictureViewSet):
+    allowed_methods = ['GET']
+    permission_classes = ()
+
+    def get_queryset(self):
+        return super(LastPictureViewSet, self).get_queryset()[:12]
+
+
 class MyPictureViewSet(PictureViewSet):
     allowed_methods = ['GET']
 

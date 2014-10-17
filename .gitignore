@@ -1,5 +1,6 @@
 /.idea
 /media/pictures
+/media/cache
 /media/uploaded
 /static
 /zips/*.zip

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block ngController %}{% if my %}MyPictureListCtrl{% else %}UserPictureListCtrl{% endif %}{% endblock %}
+
 {% block page_h1 %}
     {% if my %}
         Мои изображения
@@ -7,23 +9,19 @@
         Изображения <strong>{{ gallery_user.username }}</strong>
     {% endif %}
 
-    {% if pictures_count %}
-        ({{ pictures_count }})
-    {% endif %}
-
 {% endblock %}
 
 
 {% block pictures %}
+
     <div class="pictures">
 
-            <a ng-repeat="picture in pictures" href="{$ picture.image_url $}" id="picture_id{$picture.id$}" class="picture" data-gallery >
-                <img class="img-thumbnail" alt="200x200" src="{$picture.image_url$}" style="width: 200px; height: 200px;">
-            </a>
-
-            {% comment %}<div class="alert alert-info" role="alert">
-                Изображений нет!
-            </div>{% endcomment %}
+        <a ng-repeat="picture in pictures" href="{$ picture.image_url $}" id="picture_id{$ picture.id $}" class="picture" data-gallery >
+            <img class="img-thumbnail" alt="200x200" ng-src="{$ picture.image_small_url $}" style="width: 200px; height: 200px;">
+        </a>
+        <div class="alert alert-info" role="alert" ng-hide="pictures.length">
+            Изображений нет!
+        </div>
 
     </div>
 {% endblock %}
