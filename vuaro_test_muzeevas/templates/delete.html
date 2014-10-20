@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block ngController %}{% endblock %}
+
 {% block content %}
     <div class="page-header">
         <h1>Удалить изображения</h1>
@@ -14,7 +18,9 @@
                         <div class="img-thumbnail">
                             <div class="picture">
                                 <a href="{{ form.initial.image.url }}" data-gallery>
-                                    <img alt="200x200" src="{{ form.initial.image.small.url }}" style="width: 200px; height: 200px;">
+                                    {% thumbnail form.initial.image '200x200' crop="center" as im %}
+                                        <img alt="200x200" src="{{ im.url }}" style="width: 200px; height: 200px;">
+                                    {% endthumbnail %}
                                 </a>
                             </div>
 

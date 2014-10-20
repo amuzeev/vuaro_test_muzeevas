@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{% url 'index' %}">Vuaro test</a>
+                    <a class="navbar-brand" href="{% url 'index' %}" target="_self">Vuaro test</a>
                 </div>
 
 
@@ -45,13 +45,13 @@
                         <ul class="nav navbar-nav">
 
                             {% comment %}<li class="active"><a href="#">Home</a></li>{% endcomment %}
-                            <li><a href="{% url 'my_picture' %}">Мои изображения</a></li>
-                            <li><a href="{% url 'upload' %}">Добавить</a></li>
-                            <li><a href="{% url 'delete' %}">Удалить</a></li>
+                            <li><a href="{% url 'my_picture' %}" target="_self">Мои изображения</a></li>
+                            <li><a href="{% url 'upload' %}" target="_self">Добавить</a></li>
+                            <li><a href="{% url 'delete' %}" target="_self">Удалить</a></li>
                         </ul>
 
                         <ul class="navbar-form navbar-right">
-                            <li><a href="{% url 'logout' %}" class="btn btn-primary" href="#">Logout</a></li>
+                            <li><a href="{% url 'logout' %}" class="btn btn-primary" target="_self">Logout</a></li>
                         </ul>
 
                     {% else %}
@@ -114,7 +114,7 @@
                         <h4>Пользователи</h4>
                         <ol class="list-unstyled">
                             {% for u in users %}
-                                <li><a href="{% url 'user_picture' user_pk=u.pk %}">{{ u.username }}</a></li>
+                                <li><a href="{% url 'user_picture' user_pk=u.pk %}" target="_self">{{ u.username }}</a></li>
                             {% endfor %}
                         </ol>
                     </div>
