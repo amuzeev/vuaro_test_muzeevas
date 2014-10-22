@@ -2,8 +2,11 @@
 This application was developed and tested on:
 
 * Django 1.7
-* celery==3.1.15
+* Celery 3.1.15
 * Python 2.7
+* RabbitMQ 3.3.5
+* Tornado 4.0.2
+* Redis server 2.2.12
 
 
 ## Configuration
