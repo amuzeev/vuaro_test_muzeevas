@@ -1,3 +1,7 @@
+## About
+User gallery application
+
+
 ## Requirements
 This application was developed and tested on:
 
