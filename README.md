@@ -1,5 +1,6 @@
 ## About
 User gallery application
+Django + Celery/RabbitMQ + Tornado/WebSocket + AngularJS
 
 
 ## Requirements
